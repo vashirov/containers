@@ -9,16 +9,11 @@ RUN mkdir -p /data/config && \
     mkdir -p /run/dirsrv && \
     ln -sf /data/config /etc/dirsrv/slapd-localhost && \
     ln -sf /data/ssca /etc/dirsrv/ssca && \
-    ln -sf /data/run /run/dirsrv && \
-    chown -R dirsrv: /data && \
-    chown -R dirsrv: /run/dirsrv && \
-    chgrp -R dirsrv /etc/dirsrv 
+    ln -sf /data/run /run/dirsrv
 
 VOLUME /data
 
 EXPOSE 30389 30636
-
-USER dirsrv
 
 HEALTHCHECK --start-period=5m --timeout=5s --interval=5s --retries=2 \
     CMD /usr/libexec/dirsrv/dscontainer -H
